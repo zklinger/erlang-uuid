@@ -1,0 +1,39 @@
+UUID generator for Erlang
+
+Copyright 2010 Zoltan Klinger <zoltan dot klinger at gmail dot com>
+
+1. General Information:
+---------------------------------
+  The UUID generator is implemented as a gen_server making calls to a
+  linked in driver.
+
+2. Dependencies:
+---------------------------------
+  The linked in drivier is using the libuuid library.
+
+2.1 Obtaining the libuuid library
+---------------------------------
+  Ubuntu:
+    sudo apt-get install uuid-dev
+
+  Cygwin:
+    install the e2fsprogs package
+
+3. Building the UUID generator
+---------------------------------
+  Go to the root level of the uuid project and build the linked in
+  driver and compile the Erlang files:
+  $ make
+
+4. Using the UUID generator
+---------------------------------
+$ erl -pz ./ebin
+1> uuid:start_link("priv/lib", "uuid_gen_drv").
+{ok,<0.34.0>}
+2> uuid:create().  
+{ok,"ae42a570-08dd-4e10-8ec5-2f1485efe8bd"}
+3> uuid:create_t().
+{ok,"b80668e2-51f5-11df-aab5-000e3526dd6e"}
+4> uuid:stop().
+stopped
+
